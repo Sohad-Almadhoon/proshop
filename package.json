@@ -1,0 +1,35 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "mern shopping cart app",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^8.0.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "js-tokens": "^4.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "loose-envify": "^1.4.0",
+    "mongoose": "^7.0.3",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.22",
+    "object-assign": "^4.1.1",
+    "prop-types": "^15.8.1",
+    "react-helmet": "^6.1.0",
+    "react-is": "^16.13.1",
+    "react-paypal-button-v2": "^2.6.3",
+    "react-router-bootstrap": "^0.26.2"
+  },
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix front-end",
+    "dev": "concurrently \"npm run server\" \"npm run client\" "
+  },
+  "author": "Sohad",
+  "license": "ISC"
+}
