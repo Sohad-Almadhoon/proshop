@@ -24,13 +24,13 @@ const ProfileScreen = () => {
     loading: loadingOrders,
     error: errorOrders,
   } = useSelector((state) => state.listMyOrders);
-  console.log(success);
+
   useEffect(() => {
     if (!userInfo) {
       navigate("/login");
     } else {
-      if (!user.name || !user || success) {
-        dispatch({type: USER_UPDATE.USER_UPDATE_PROFILE_RESET})
+      if (!user?.name || !user || success) {
+        dispatch({ type: USER_UPDATE.USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails("profile"));
         dispatch(listMyOrders());
       } else {
@@ -54,48 +54,54 @@ const ProfileScreen = () => {
       <Col md={3}>
         <h2>User Profile</h2>
         {message && <Message varaint="danger">{message}</Message>}
-        {error && <Message varaint="danger">{error}</Message>}
         {success && <Message varaint="success">Profile Updated !</Message>}
-        {loading && <Loader />}
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId="name" className="my-3">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Username"
-              value={name}
-              onChange={(e) => setName(e.target.value)}></Form.Control>
-          </Form.Group>
-          <Form.Group controlId="email" className="my-3">
-            <Form.Label>Email Address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}></Form.Control>
-          </Form.Group>
-          <Form.Group controlId="password" className="my-3">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Enter Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}></Form.Control>
-          </Form.Group>
-          <Form.Group controlId="confirmpassword" className="my-3">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Repeat Password"
-              value={confirmPassword}
-              onChange={(e) =>
-                setConfirmPassword(e.target.value)
-              }></Form.Control>
-          </Form.Group>
-          <Button type="submit" variant="primary" className="my-3">
-            Update
-          </Button>
-        </Form>
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Message varaint="danger">{error}</Message>
+        ) : (
+          <>
+            <Form onSubmit={submitHandler}>
+              <Form.Group controlId="name" className="my-3">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Username"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}></Form.Control>
+              </Form.Group>
+              <Form.Group controlId="email" className="my-3">
+                <Form.Label>Email Address</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}></Form.Control>
+              </Form.Group>
+              <Form.Group controlId="password" className="my-3">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Enter Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}></Form.Control>
+              </Form.Group>
+              <Form.Group controlId="confirmpassword" className="my-3">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Repeat Password"
+                  value={confirmPassword}
+                  onChange={(e) =>
+                    setConfirmPassword(e.target.value)
+                  }></Form.Control>
+              </Form.Group>
+              <Button type="submit" variant="primary" className="my-3">
+                Update
+              </Button>
+            </Form>
+          </>
+        )}
       </Col>
       <Col md={9}>
         <h2>My Orders</h2>
@@ -138,7 +144,9 @@ const ProfileScreen = () => {
                   </td>
                   <td>
                     <LinkContainer to={`/orders/${order._id}`}>
-                      <Button variant="light" className="btn-sm">Details</Button>
+                      <Button variant="light" className="btn-sm">
+                        Details
+                      </Button>
                     </LinkContainer>
                   </td>
                 </tr>

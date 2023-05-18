@@ -19,7 +19,6 @@ import Message from "../Message";
 import Loader from "../Loader";
 import { useNavigate } from "react-router-dom";
 import {
-  CREATE_PRODUCT,
   CREATE_REVIEW_PRODUCT,
 } from "../../constants/productsConst";
 import Meta from "../Meta";

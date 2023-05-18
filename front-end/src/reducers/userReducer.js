@@ -70,6 +70,8 @@ export const userUpdateProfileReducer = (
       return { loading: false, user: action.payload, success: true };
     case USER_UPDATE.USER_UPDATE_PROFILE_FAIL:
       return { loading: false, error: action.payload };
+    case USER_UPDATE.USER_UPDATE_PROFILE_RESET:
+      return { user: {} };
     default:
       return state;
   }
@@ -99,14 +101,14 @@ export const deleteUserReducer = (state = {}, action) => {
     case USER_DELETE.USER_DELETE_REQUEST:
       return { loading: true };
     case USER_DELETE.USER_DELETE_SUCCESS:
-      return { loading: false, success:true };
+      return { loading: false, success: true };
     case USER_DELETE.USER_DELETE_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;
   }
 };
-export const editUserReducer = (state = {user:{}}, action) => {
+export const editUserReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case USERS_UPDATE.USERS_UPDATE_REQUEST:
       return { loading: true };
