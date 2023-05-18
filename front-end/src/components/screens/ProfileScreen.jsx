@@ -24,13 +24,22 @@ const ProfileScreen = () => {
     loading: loadingOrders,
     error: errorOrders,
   } = useSelector((state) => state.listMyOrders);
+  const submitHandler = (e) => {
+    console.log("Hello");
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setMessage("Passwords don't match");
+    } else {
+      console.log("Id", user._id);
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
+    }
+  };
 
   useEffect(() => {
     if (!userInfo) {
       navigate("/login");
     } else {
-      if (!user?.name || !user || success) {
-        dispatch({ type: USER_UPDATE.USER_UPDATE_PROFILE_RESET });
+      if (!user?.name) {
         dispatch(getUserDetails("profile"));
         dispatch(listMyOrders());
       } else {
@@ -38,16 +47,15 @@ const ProfileScreen = () => {
         setEmail(user.email);
       }
     }
-  }, [userInfo, navigate, user, dispatch, success]);
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      setMessage("Passwords don't match");
-    } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }));
+  }, [userInfo, navigate, user, dispatch]);
+  useEffect(() => {
+    if (success) {
+      dispatch(getUserDetails("profile"));
+      setTimeout(() => {
+        dispatch({ type: USER_UPDATE.USER_UPDATE_PROFILE_RESET });
+      }, 2000);
     }
-  };
+  }, [success, dispatch]);
 
   return (
     <Row>
