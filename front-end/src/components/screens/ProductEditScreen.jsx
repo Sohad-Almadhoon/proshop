@@ -83,7 +83,6 @@ const ProductEditScreen = () => {
         price,
         brand,
         image,
-        numReviews: 65,
       })
     );
   };
