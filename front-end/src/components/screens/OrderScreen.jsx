@@ -62,6 +62,9 @@ const OrderScreen = () => {
     }
   }, [dispatch, id, navigate, order, successDeliver, successPay, userInfo]);
 
+  useEffect(() => {
+    dispatch(getOrderDetails(id));
+  }, [id, dispatch]);
   return loading ? (
     <Loader />
   ) : error ? (
